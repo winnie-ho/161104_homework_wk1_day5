@@ -122,16 +122,18 @@ def customer_can_afford_pet (customer, new_pet)
 end
 
 
-# # Integration Tests
+# Integration Tests
 def sell_pet_to_customer(shop, pet, customer)
   #updating the customers pet count now that that they have bought a pet.
-   binding.pry
-   customer[:pets]<<shop[:pets][3]
-   shop[:pets].delete_at(3)
+
+  add_pet_to_customer(customer, pet)
+
+  increase_pets_sold(shop,pet.count)
+  pets_sold(shop)
+
+
+  add_or_remove_cash(shop, shop[:pets].index(pet)[:price])
 
  
 
-  # return customer_pet_count(customer)
-  # return pets_sold(shop)
-  # return total_cash(shop)
 end
