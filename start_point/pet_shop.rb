@@ -124,21 +124,34 @@ end
 
 # Integration Tests
 def sell_pet_to_customer(shop, pet, customer)
-  #updating the customers pet count now that that they have bought a pet.
+#check to see if the pet exists in the pet shop before selling.
+  unless pet==nil
 
-  add_pet_to_customer(customer, pet)
+    #determine the array index of the pet by it's name.
+    index = 0
+    counter = 0
+      while counter<shop[:pets].length
+          if shop[:pets][counter][:name].include?(pet.values[0])==true
+           index = counter
+          end
+          counter+=1
+      end
 
-  increase_pets_sold(shop,pet.count)
-  pets_sold(shop)
+    #check to see if the customer can afford the pet before selling.
+    unless customer_can_afford_pet(customer,shop[:pets][index]) ==false
 
-  index = 0
-  counter = 0
-    while counter<shop[:pets].length
-        if shop[:pets][counter][:name].include?(pet.values[0])==true
-         index = counter
-        end
-        counter+=1
+
+    #the selling process changes the following  
+    add_pet_to_customer(customer, pet)
+
+    increase_pets_sold(shop,pet.count)
+    pets_sold(shop)
+
+    add_or_remove_cash(shop, shop[:pets][index][:price])
     end
-  add_or_remove_cash(shop, shop[:pets][index][:price])
-
+  end
 end
+
+
+
+
