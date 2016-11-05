@@ -1,5 +1,4 @@
-# require ('pry-byebug')
-
+require ('pry-byebug')
 
 def pet_shop_name(shop)
   return shop[:name]
@@ -69,24 +68,30 @@ def find_pet_by_name(shop, pet_name)
     else
       return matching_names
     end
-
 end
 
 
-# def find_pet_by_name(shop, pet_name)
-#   counter = 0
-#   matches = []
-#     while counter<shop[:pets].length
-#         if
-#           shop[:pets][counter][:name].include?(pet_name)==true
-#           matches<<1
-#         end
-#       counter+=1
-#     end
+def remove_pet_by_name(shop,name_to_remove)
 
-#     return matches[0]
+  counter = 0
+    while counter<shop[:pets].length
+        if shop[:pets][counter][:name].include?(name_to_remove)==true
+         shop[:pets].delete_at(counter)
+        end
+        counter+=1
+    end
+
+    find_counter=0
     
-# end
+    while find_counter<shop[:pets].length
+      unless shop[:pets][find_counter][:name].include?(name_to_remove)==true
+       deleted_animals = nil 
+      end
+      find_counter+=1
+    end
+end
+
+
 
 
 
