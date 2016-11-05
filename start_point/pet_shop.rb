@@ -9,7 +9,7 @@ def total_cash(account)
 end
 
 def add_or_remove_cash(account, amount)
-  account[:admin][:total_cash] = account[:admin][:total_cash] + amount
+  return account[:admin][:total_cash] = account[:admin][:total_cash] + amount
 end
 
 def pets_sold(shop)
@@ -131,9 +131,14 @@ def sell_pet_to_customer(shop, pet, customer)
   increase_pets_sold(shop,pet.count)
   pets_sold(shop)
 
-
-  add_or_remove_cash(shop, shop[:pets].index(pet)[:price])
-
- 
+  index = 0
+  counter = 0
+    while counter<shop[:pets].length
+        if shop[:pets][counter][:name].include?(pet.values[0])==true
+         index = counter
+        end
+        counter+=1
+    end
+  add_or_remove_cash(shop, shop[:pets][index][:price])
 
 end
